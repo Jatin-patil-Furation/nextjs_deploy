@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 export default function AddTopic() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
+  const api = process.env.API_URI;
+  console.log("page", process.env.API_URI);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -18,13 +19,16 @@ export default function AddTopic() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/topics", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ title, description }),
-      });
+      const res = await fetch(
+        `https://nextjs-deploy-sand.vercel.app/api/topics`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({ title, description }),
+        }
+      );
 
       if (res.ok) {
         router.push("/");

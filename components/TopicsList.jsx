@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -7,13 +6,17 @@ import { HiPencilAlt } from "react-icons/hi";
 
 const TopicsList = () => {
   const [topics, setTopics] = useState([]);
+  const api = process.env.API_URI;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/topics", {
-          cache: "no-store",
-        });
+        const res = await fetch(
+          `https://nextjs-deploy-sand.vercel.app/api/topics`,
+          {
+            cache: "no-store",
+          }
+        );
 
         if (!res.ok) {
           throw new Error("Failed to fetch topics");
